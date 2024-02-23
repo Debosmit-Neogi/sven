@@ -76,4 +76,5 @@ MODEL_DIRS = {
     '6b': 'Salesforce/codegen-6B-multi',
     'incoder': 'facebook/incoder-6B',
     'santa': 'bigcode/santacoder',
+    'llama' : 'codellama/CodeLlama-7b-Python-hf'
 }
