@@ -431,9 +431,16 @@ def load_model(model_type, path, is_training, args):
         assert False
 
     model.resize_token_embeddings(len(tokenizer))
-    input_device = parallelize_model(model, args)
+    input_device = is_gpu_available(model, args)
+    # input_device = parallelize_model(model, args)
     return tokenizer, model, input_device
 
+def is_gpu_available(model, args):
+    # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(args.device)
+    input_device = args.device
+    return input_device
+    
 def parallelize_model(model, args):
     if args.n_gpu > 1:
         model.parallelize()
