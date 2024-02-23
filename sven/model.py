@@ -335,9 +335,9 @@ def model_from_pretrained(lm_path, model_type, config):
             
     elif lm_path.startswith('codellama/CodeLlama-'):
         if model_type == 'lm':
-            model_class = LlamaForQuestionAnswering
+            model_class = LlamaForCausalLM
         elif model_type == 'prefix':
-            model_class = LlamaForQuestionAnswering
+            model_class = LlamaForCausalLM
         else:
             assert False
             
@@ -380,7 +380,7 @@ def config_from_pretrained(lm_path, path):
         return AutoConfig.from_pretrained(path)
 
 def save_model(model, path, args):
-    if type(model) in (CodeGenPrefixCausalLM, IncoderPrefixLM, SantaPrefixLM, LlamaForQuestionAnswering):
+    if type(model) in (CodeGenPrefixCausalLM, IncoderPrefixLM, SantaPrefixLM, LlamaForCausalLM):
         assert args.pretrain_dir.startswith('Salesforce/codegen-') or args.pretrain_dir.startswith('codellama/CodeLlama-') or args.pretrain_dir.startswith('facebook/incoder-') or args.pretrain_dir == 'bigcode/santacoder'
         config_file = os.path.join(path)
         model.config.save_pretrained(config_file)
