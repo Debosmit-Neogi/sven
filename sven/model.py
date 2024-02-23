@@ -3,7 +3,7 @@ import torch
 from typing import Optional, Tuple, Union, List
 from transformers import AutoTokenizer, AutoConfig, logging
 from transformers.modeling_outputs import CausalLMOutputWithPast, CausalLMOutputWithCrossAttentions
-from sven.hf import CodeGenForCausalLM, XGLMForCausalLM, GPT2LMHeadCustomModel, GPT2CustomConfig, LlamaForQuestionAnswering
+from sven.hf import CodeGenForCausalLM, XGLMForCausalLM, GPT2LMHeadCustomModel, GPT2CustomConfig, LlamaForCausalLM
 
 class CodeGenPrefixCausalLM(CodeGenForCausalLM):
     def __init__(self, config):
@@ -246,7 +246,7 @@ class SantaPrefixLM(GPT2LMHeadCustomModel):
             output_hidden_states,
             return_dict,
         )
-class llamaPrefixLM(LlamaForQuestionAnswering):
+class llamaPrefixLM(LlamaForCausalLM):
     def __init__(self, config):
         super().__init__(config)
 
